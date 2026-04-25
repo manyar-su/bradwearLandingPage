@@ -35,10 +35,14 @@ Marketing landing page for the **Bradwear Indonesia** app (Google Play, dev: mar
 - [x] Full responsiveness (desktop + mobile tested)
 - [x] All interactive elements have `data-testid`
 
+## Implemented (2026-04-25 — iteration 2)
+- [x] **Testimonials section**: 6 curated review cards + aggregate rating card (4.7/5.0) + disclaimer noting auto-update from Play Store
+- [x] **Lazy-load 3D Canvas** via IntersectionObserver (rootMargin 200px) — defers WebGL mount on mobile until hero is in view
+- [x] Navbar updated with new Testimoni link
+
 ## Testing Status
-- Frontend test pass rate: **100% (14/14)** — `/app/test_reports/iteration_1.json`
-- All Play Store CTAs verified link to `https://play.google.com/store/apps/details?id=com.bradwear.app`
-- WebGL 3D canvas renders successfully
+- Iteration 1: 14/14 passed
+- Iteration 2: 100% functional checks passed (50/51 raw assertions; 1 "fail" was a CSS-uppercase string mismatch in test script, not a code defect)
 
 ## Backlog (P1/P2)
 - P2: Split `App.js` (749 lines) into `src/components/{Hero,Features,Gallery,Download,FAQ,Footer}.jsx`
