@@ -1,0 +1,119 @@
+{
+  "theme": "dark",
+  "archetype": "Archetype 5: Jewel & Luxury (Premium Dark Streetwear)",
+  "colors": {
+    "background": "#09090b",
+    "surface": "#18181b",
+    "surfaceGlass": "rgba(24, 24, 27, 0.6)",
+    "primary": "#ffffff",
+    "primaryForeground": "#000000",
+    "accent": "#FF4500",
+    "muted": "#71717a",
+    "border": "rgba(255, 255, 255, 0.1)"
+  },
+  "typography": {
+    "headingFont": "Clash Display",
+    "bodyFont": "Satoshi",
+    "h1": "text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tighter",
+    "h2": "text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight",
+    "h3": "text-xl md:text-2xl font-medium tracking-tight",
+    "body": "text-base text-zinc-400 leading-relaxed",
+    "overline": "text-xs font-bold uppercase tracking-[0.2em] text-zinc-500"
+  },
+  "spacing": {
+    "sectionPadding": "py-24 md:py-32 lg:py-40",
+    "containerPadding": "px-6 md:px-12 max-w-7xl mx-auto",
+    "gapLarge": "gap-16 md:gap-24"
+  },
+  "motion": {
+    "library": ["framer-motion", "lenis"],
+    "heroEntrance": "Staggered fade-up for typography, floating animation for 3D element",
+    "scrollEffects": "Parallax on images, smooth reveal on section entry",
+    "hoverStates": "Subtle scale (1.02), border brightness increase, ambient shadow"
+  },
+  "3d_strategy": {
+    "library": "@react-three/fiber, @react-three/drei",
+    "implementation": "In the Hero section, render a `<Canvas>`. Use `<Float>` to suspend a stylized smartphone mesh (or a minimalist rounded box representing the app) with a dark `<MeshPhysicalMaterial>` (high metalness, low roughness, clearcoat). Light the scene with dramatic rim lighting and a spot light to create a premium cinematic feel.",
+    "fallback": "If 3D fails, fallback to a high-quality static image with a subtle Framer Motion float."
+  },
+  "components": {
+    "navbar": "Glassmorphism header `backdrop-blur-xl bg-zinc-950/70 border-b border-white/10`. Sticky top z-50. Brand text left, nav center, CTA right.",
+    "button": "Solid white background, black text for primary. Sharp edges or minimal radius (rounded-md). Industrial feel.",
+    "bentoGrid": "For Features. Use Mode A: Tetris Grid. Direct children wrapped in Framer Motion. Surfaces are zinc-900 with 1px border-white/10. Add `p-8` inside cards.",
+    "marquee": "For screenshots gallery. Use react-fast-marquee or Framer Motion loop. Gap-8. No standard scrollbars.",
+    "accordion": "For FAQ. Minimalist, 1px bottom border per item. No backgrounds. Use Shadcn Accordion."
+  },
+  "sections": [
+    {
+      "name": "Hero",
+      "content": {
+        "tagline": "Tampil Tajam dan Percaya Diri",
+        "description": "Bradwear: experience your professional uniform. Keseimbangan antara fungsionalitas kerja dan gaya urban modern. Spesialis kemeja kerja dan seragam profesional dari Tasikmalaya.",
+        "cta": "Unduh di Google Play"
+      },
+      "layout": "Two columns on desktop: Left side typography, Right side R3F Canvas for 3D phone showcase."
+    },
+    {
+      "name": "About",
+      "content": {
+        "text": "Dibuat dengan standar kualitas tinggi di Tasikmalaya untuk Indonesia. Setiap produk Bradwear dirancang untuk daya tahan maksimal tanpa mengorbankan kenyamanan."
+      },
+      "layout": "Generous spacing `py-32`. Large text centered, with a dark moody fashion portrait acting as a parallax background or side image."
+    },
+    {
+      "name": "Features",
+      "items": [
+        {"title": "Spesialis Kemeja Kerja", "desc": "Koleksi kemeja kerja dengan potongan presisi yang menciptakan tampilan profesional sekaligus tegas."},
+        {"title": "Kualitas Premium", "desc": "Terbuat dari bahan pilihan yang tangguh untuk aktivitas tinggi namun tetap sejuk dipakai."},
+        {"title": "Koleksi Terlaris", "desc": "Temukan seri favorit seperti Brad V-1, V-2, dan Ventura Series, dipercaya oleh ribuan pengguna."},
+        {"title": "Pesan Kustom Mudah", "desc": "Integrasi pemesanan langsung mempermudah mendapatkan produk atau seragam instansi impian Anda."},
+        {"title": "Desain Modern", "desc": "Perpaduan streetwear dan gaya kerja formal yang membuat Anda tetap keren di luar jam kantor."}
+      ],
+      "layout": "Bento Grid (Tetris Mode A). Asymmetrical layout, high visual tension."
+    },
+    {
+      "name": "Screenshots",
+      "layout": "Full-width Marquee of 8 app screenshots to create a 'Kinetic Texture'. Overflow hidden."
+    },
+    {
+      "name": "Download Steps",
+      "layout": "Vertical list with massive background numbers (1, 2, 3) in `text-white/5`. 'Cara Download' guide."
+    },
+    {
+      "name": "FAQ",
+      "layout": "Narrow container `max-w-3xl mx-auto`. Clean accordion."
+    },
+    {
+      "name": "Footer",
+      "layout": "Massive typography 'BRADWEAR' (text-[10vw] to text-[15vw]). Contact links: +6282319226530, gilangsetianugraha9@gmail.com, website."
+    }
+  ],
+  "media": {
+    "hero_background": "https://images.unsplash.com/photo-1602475063211-3d98d60e3b1f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwxfHxkYXJrJTIwdGV4dHVyZXxlbnwwfHx8fDE3NzcxNTAzMzJ8MA&ixlib=rb-4.1.0&q=85",
+    "about_image": "https://images.unsplash.com/photo-1608366592358-4a372c5857e6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHwxfHxmYXNoaW9uJTIwcG9ydHJhaXQlMjBkYXJrfGVufDB8fHx8MTc3NzE1MDMzMnww&ixlib=rb-4.1.0&q=85",
+    "features_texture": "https://images.pexels.com/photos/7641151/pexels-photo-7641151.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "screenshots": [
+      "https://play-lh.googleusercontent.com/OhF_2GmhSHe4PF5xcUnK6Fc6RKKUIQmWsEuM1SN3Omb2nNI0GJXiVLu0vTJLEI88zN6veqHXTWjXqJPFh-ef=w526-h296-rw",
+      "https://play-lh.googleusercontent.com/Pc7ZsQaB70Ic0mPHzLvnPhWMy3avaJlbgvVuj_Lz2Dx14X_RprPtA5X4-LcVbVzNGHAGfMOoOvQ13vOkQhhMSA=w526-h296-rw",
+      "https://play-lh.googleusercontent.com/IH9agBlv5QKWxi68PVtvqRytafKCMjv2K2kNxYZm3BQ7zbb9SIwf3ZooZr7mhK3EvI6zeERtDYJbwJjIHLrH=w526-h296-rw",
+      "https://play-lh.googleusercontent.com/QOZPUFDQHIC9lMTa7ETFDDPHZd-S1NJRVOIhB6gvS_2YzgeP35svBrjGSe2sRhDzaaBW0KovqUU7oFK2DGMi=w526-h296-rw",
+      "https://play-lh.googleusercontent.com/Ry5ejWcR1KfUs85IXdVl93zsIdg5WFxjJr3gi1xXnkXPrAqj0RVhWp8iUUW3o8kF4SD8XarixrZjjYGictHp=w526-h296-rw",
+      "https://play-lh.googleusercontent.com/wZ2dYP9Dy_mT8N8-gO_iCcsCW1pqLZKBKzSzNTeoqG4m2jNv626scUTtY8ijXCTw59br4zEzX5qHfOv1E0AN=w526-h296-rw",
+      "https://play-lh.googleusercontent.com/pRwu0N9gGjyh-zh0KF7ttS79SziGLPuoHrT6ZG72Vbrb4DM_8ozFdtcnElNDCx9RVjporfvwRuFHJ6gr05KdCJE=w526-h296-rw",
+      "https://play-lh.googleusercontent.com/x83anV6boUW0muCJpc1pEzOFKQ9hk4nv_mPITh5u9SIpCqvKkVzaouqakHypactkFV5iOfFeiN3rCpKBq5QsCw=w526-h296-rw"
+    ]
+  },
+  "rules": {
+    "buttons": "Do not use generic blue buttons. Primary CTA must be stark white with black text. Include hover states that invert or glow.",
+    "testing": "All interactive elements MUST have data-testid attributes (e.g., data-testid='hero-cta-button')",
+    "components": "Use pure HTML/Tailwind for structural layout (grid/flex). Use Shadcn only for interactive components like Accordion for FAQ.",
+    "fonts": "Use 'Clash Display' for headings (via import or local) and 'Satoshi' for body. Do not use Inter for headings."
+  },
+  "instructions_to_main_agent": [
+    "1. Initialize React project with Vite if not done.",
+    "2. Install Tailwind, framer-motion, @react-three/fiber, @react-three/drei, lucide-react.",
+    "3. Build layout exactly as per guidelines.",
+    "4. Ensure Hero section has a 3D Canvas element displaying a premium mockup.",
+    "5. Connect all images directly from the URLs provided in the media object."
+  ]
+}
