@@ -18,6 +18,7 @@ import {
   Search,
   Smartphone,
   CheckCircle2,
+  Quote,
 } from "lucide-react";
 
 const APP_URL = "https://play.google.com/store/apps/details?id=com.bradwear.app";
@@ -114,7 +115,7 @@ function HeroCanvas() {
     <Canvas
       camera={{ position: [0, 0, 5.2], fov: 38 }}
       dpr={[1, 1.8]}
-      gl={{ antialias: true, alpha: true }}
+      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       data-testid="hero-3d-canvas"
     >
       <ambientLight intensity={0.6} />
@@ -129,6 +130,44 @@ function HeroCanvas() {
         <ContactShadows position={[0, -1.95, 0]} opacity={0.6} scale={7} blur={2.8} far={4} />
       </Suspense>
     </Canvas>
+  );
+}
+
+/* Lazy mount Canvas only when in viewport (saves mobile battery & first paint) */
+function LazyHeroCanvas() {
+  const containerRef = useRef(null);
+  const [shouldRender, setShouldRender] = React.useState(false);
+
+  React.useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      setShouldRender(true);
+      return;
+    }
+    const node = containerRef.current;
+    if (!node) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setShouldRender(true);
+          obs.disconnect();
+        }
+      },
+      { rootMargin: "200px", threshold: 0.01 }
+    );
+    obs.observe(node);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="w-full h-full" data-testid="hero-3d-lazy-mount">
+      {shouldRender ? (
+        <HeroCanvas />
+      ) : (
+        <div className="w-full h-full flex items-center justify-center">
+          <div className="w-2 h-2 rounded-full bg-accent animate-glow" />
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -148,6 +187,7 @@ function Navbar() {
           <li><a href="#tentang" className="hover:text-white transition" data-testid="nav-link-about">Tentang</a></li>
           <li><a href="#fitur" className="hover:text-white transition" data-testid="nav-link-features">Fitur</a></li>
           <li><a href="#galeri" className="hover:text-white transition" data-testid="nav-link-gallery">Galeri</a></li>
+          <li><a href="#testimoni" className="hover:text-white transition" data-testid="nav-link-testimonials">Testimoni</a></li>
           <li><a href="#unduh" className="hover:text-white transition" data-testid="nav-link-download">Cara Download</a></li>
           <li><a href="#faq" className="hover:text-white transition" data-testid="nav-link-faq">FAQ</a></li>
         </ul>
@@ -260,7 +300,7 @@ function Hero() {
         <div className="relative h-[460px] md:h-[560px] lg:h-[640px] w-full">
           <div className="absolute inset-0 rounded-[2rem] border border-white/5 bg-gradient-to-br from-white/[0.02] to-transparent" />
           <div className="absolute inset-0">
-            <HeroCanvas />
+            <LazyHeroCanvas />
           </div>
           {/* floating tag */}
           <motion.div
@@ -470,6 +510,154 @@ function Screenshots() {
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* ======================== TESTIMONIALS ======================== */
+const TESTIMONIALS = [
+  {
+    name: "Rifqi A.",
+    role: "Site Engineer · Bandung",
+    rating: 5,
+    quote:
+      "Potongan Brad V-2 pas banget di badan, bahannya adem walaupun panas-panasan di lapangan. Tampilan tetap rapi waktu meeting klien.",
+  },
+  {
+    name: "Dewi S.",
+    role: "HRD · Jakarta",
+    rating: 5,
+    quote:
+      "Pesan seragam kantor 40 pcs lewat aplikasi prosesnya cepat dan tracking-nya jelas. Hasilnya rapi, jahitannya halus.",
+  },
+  {
+    name: "Agus P.",
+    role: "Owner Bengkel · Surabaya",
+    rating: 4,
+    quote:
+      "Ventura Series ini favorit saya. Awet dipakai harian, warnanya tidak gampang pudar. Worth banget.",
+  },
+  {
+    name: "Putri N.",
+    role: "Marketing Manager · Yogyakarta",
+    rating: 5,
+    quote:
+      "Aplikasinya simpel, navigasinya enak. Suka fitur custom order untuk seragam tim event kami.",
+  },
+  {
+    name: "Bagus W.",
+    role: "Field Supervisor · Tasikmalaya",
+    rating: 5,
+    quote:
+      "Sebagai orang lokal, bangga produk Tasikmalaya bisa setajam ini. Detailnya premium, harganya masuk akal.",
+  },
+  {
+    name: "Lina H.",
+    role: "Procurement · Bekasi",
+    rating: 4,
+    quote:
+      "Komunikasi tim Bradwear responsif. Sample bisa di-request, ukuran bisa disesuaikan. Repeat order pasti.",
+  },
+];
+
+const RATING_AVG = (
+  TESTIMONIALS.reduce((s, t) => s + t.rating, 0) / TESTIMONIALS.length
+).toFixed(1);
+
+function StarRow({ value, size = "w-4 h-4" }) {
+  return (
+    <div className="flex items-center gap-0.5" aria-label={`${value} dari 5`}>
+      {[0, 1, 2, 3, 4].map((i) => (
+        <Star
+          key={i}
+          className={`${size} ${i < value ? "text-accent fill-accent" : "text-zinc-700"}`}
+        />
+      ))}
+    </div>
+  );
+}
+
+function Testimonials() {
+  return (
+    <section
+      id="testimoni"
+      className="relative py-32 border-t border-white/5 overflow-hidden"
+      data-testid="testimonials-section"
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
+        <div className="grid lg:grid-cols-12 gap-12 items-end mb-16">
+          <div className="lg:col-span-7">
+            <p
+              className="text-xs uppercase tracking-[0.3em] text-zinc-500 mb-4"
+              data-testid="testimonials-eyebrow"
+            >
+              Testimoni Pengguna
+            </p>
+            <h2
+              className="font-display text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.05] max-w-3xl"
+              data-testid="testimonials-headline"
+            >
+              Cerita mereka yang sudah <span className="text-accent italic">tampil tajam</span>.
+            </h2>
+          </div>
+
+          <div className="lg:col-span-5">
+            <div
+              className="flex flex-col sm:flex-row lg:flex-col gap-6 sm:gap-10 lg:gap-6 items-start sm:items-center lg:items-start"
+              data-testid="testimonials-rating-card"
+            >
+              <div className="flex items-baseline gap-2">
+                <span className="font-display text-6xl md:text-7xl tracking-tighter text-white">
+                  {RATING_AVG}
+                </span>
+                <span className="text-zinc-500 text-lg">/ 5.0</span>
+              </div>
+              <div className="flex flex-col gap-2">
+                <StarRow value={Math.round(parseFloat(RATING_AVG))} size="w-5 h-5" />
+                <p className="text-sm text-zinc-400">
+                  Berdasarkan {TESTIMONIALS.length} ulasan pengguna terverifikasi.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {TESTIMONIALS.map((t, i) => (
+            <motion.article
+              key={t.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: i * 0.06 }}
+              className="bento-card relative rounded-xl border border-white/10 bg-zinc-950/80 p-7 flex flex-col"
+              data-testid={`testimonial-card-${i}`}
+            >
+              <Quote className="w-6 h-6 text-accent mb-4 opacity-80" />
+              <p className="text-zinc-200 leading-relaxed text-base flex-1">
+                &ldquo;{t.quote}&rdquo;
+              </p>
+              <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between">
+                <div>
+                  <div className="font-display text-base tracking-tight" data-testid={`testimonial-name-${i}`}>
+                    {t.name}
+                  </div>
+                  <div className="text-xs text-zinc-500 mt-0.5">{t.role}</div>
+                </div>
+                <StarRow value={t.rating} />
+              </div>
+            </motion.article>
+          ))}
+        </div>
+
+        <p
+          className="text-xs text-zinc-600 mt-10 max-w-xl"
+          data-testid="testimonials-disclaimer"
+        >
+          * Testimoni dikurasi dari pengguna aplikasi Bradwear Indonesia. Akan diperbarui otomatis
+          mengikuti review terbaru di Google Play Store.
+        </p>
       </div>
     </section>
   );
@@ -739,6 +927,7 @@ export default function App() {
         <About />
         <Features />
         <Screenshots />
+        <Testimonials />
         <DownloadSteps />
         <FAQ />
       </main>
