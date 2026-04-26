@@ -80,7 +80,7 @@ function Phone3D({ screenTex }) {
       {/* Side accent bar */}
       <mesh position={[0.79, 0.6, 0]}>
         <boxGeometry args={[0.04, 0.5, 0.2]} />
-        <meshStandardMaterial color="#FF4500" emissive="#FF4500" emissiveIntensity={1.2} />
+        <meshStandardMaterial color="#22FF66" emissive="#22FF66" emissiveIntensity={1.2} />
       </mesh>
       {/* Camera bump */}
       <mesh position={[-0.5, 1.18, -0.12]}>
@@ -89,7 +89,7 @@ function Phone3D({ screenTex }) {
       </mesh>
       <mesh position={[-0.5, 1.18, -0.155]}>
         <cylinderGeometry args={[0.07, 0.07, 0.02, 32]} />
-        <meshStandardMaterial color="#FF4500" emissive="#FF4500" emissiveIntensity={0.8} />
+        <meshStandardMaterial color="#22FF66" emissive="#22FF66" emissiveIntensity={0.8} />
       </mesh>
     </group>
   );

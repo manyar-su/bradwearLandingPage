@@ -10,7 +10,8 @@ module.exports = {
       colors: {
         ink: "#09090b",
         surface: "#18181b",
-        accent: "#FF4500",
+        accent: "#22FF66",
+        accentDim: "#16cc4d",
       },
       animation: {
         marquee: "marquee 40s linear infinite",

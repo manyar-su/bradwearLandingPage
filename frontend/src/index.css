@@ -23,7 +23,7 @@ body {
 }
 
 ::selection {
-  background: #ff4500;
+  background: #22FF66;
   color: #09090b;
 }
 
@@ -40,7 +40,7 @@ body {
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff4500;
+  background: #22FF66;
 }
 
 /* Grain overlay */
@@ -67,8 +67,8 @@ body {
 /* Radial spotlight */
 .spotlight {
   background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255, 69, 0, 0.18), transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(255, 69, 0, 0.08), transparent 60%);
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(34, 255, 102, 0.18), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(34, 255, 102, 0.08), transparent 60%);
 }
 
 /* Glass */
@@ -91,7 +91,7 @@ body {
 }
 .bento-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 69, 0, 0.4);
+  border-color: rgba(34, 255, 102, 0.4);
   background: rgba(24, 24, 27, 0.9);
 }
 
